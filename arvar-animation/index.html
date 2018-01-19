@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+
+@font-face {
+    font-family: 'Arvar';
+    src:  url('Arvar-VF.ttf') format('truetype');
+}
+
+body {
+    /*background-color: rgb(23,18,100);*/
+    /*background-color: rgb(49,168,158);*/
+    background-color: rgb(29,24,96);
+    /*background-color: rgb(116,47,147);*/
+    /*background-color: rgb(50,169,158);*/
+}
+
+#arabic {
+    /*display:inline-block;*/
+    text-align: right;
+    float: right;
+    height: 520px;
+    /*border-left-style: solid;*/
+    /*border-width: 3px;*/
+    padding-right: 20px;
+    padding-left: 10px;
+    margin-top: -80px;
+    direction: rtl;
+    color: rgb(256,256,256);
+    /*color: rgb(115,48,147);*/
+    font-family: Arvar;
+    position: relative;
+    font-size: 320px;
+    font-variation-settings: "wght" 400, "wdth" 100;
+    animation-name: example;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.footer {
+  position: absolute;
+  color: rgb(256,256,256);
+  right: 15px;
+  bottom: 0;
+  padding: 0.5rem;
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 12px;
+}
+
+p {
+  font-family: Helvetica;
+  font-size: 12px;
+}
+/* Standard syntax */
+@keyframes example {
+    from {font-variation-settings: "wght" 400, "wdth" 100;}
+    to {font-variation-settings: "wght" 400, "wdth" 700;}
+}
+</style>
+</head>
+<body>
+
+<div id="arabic">ﻛﻼﻪ ﻗﺮﻣﺰﻰ</div>
+
+<div class="footer">
+  <p>Design by Sahar Afshar. Demo by José Solé.</p>
+</div>
+
+
+</body>
+</html>
