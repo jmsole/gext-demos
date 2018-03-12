@@ -1,0 +1,251 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<style>
+@font-face {
+  font-family: 'Bungalow';
+  src:  url('Bungalow-VF.ttf') format('truetype');
+}
+
+body {
+  /*background-color: rgb(29,24,96);*/
+  background-color: black;
+}
+
+#bungalow {
+  min-width: 800px;
+  max-width: 100%;
+  /*max-width: 800px;*/
+  /*resize: horizontal;*/
+  /*overflow: auto;*/
+  word-wrap: break-word;
+  position: relative;
+  direction: ltr;
+  left: 20px;
+  /* text-align: justify; */
+  float: left;
+  /*color: rgb(29,24,96);;*/
+  font-family: "Bungalow";
+  font-size: 200px;
+  font-variation-settings: "wdth" 100, "GEXT" 1;
+  /*width: 100%;*/
+  color: white;
+}
+
+#bungalow .gext {
+  font-variation-settings: "wdth" 100, "GEXT" 1;
+  /*white-space: nowrap;*/
+}
+
+.slidecontainer {
+  top: 60px;
+  left: 20px;
+  height: 80px;
+  width: 400px;
+  float: left;
+  position: relative;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 12px;
+    /*background: #fff;*/
+    outline: none;
+    /*opacity: 0.7;*/
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.gext {
+  position: relative;
+  /*overflow: visible;*/
+}
+
+.gext .handle {
+  width: 0.2em;
+  height: 0.8em;
+  background-color: grey;
+  opacity: 0;
+  position: absolute;
+  bottom: 0.1em;
+  right: 0;
+  cursor: ew-resize;
+}
+
+.gext:hover .handle {
+  opacity: 0.2;
+}
+
+.gext .handle.dragging {
+  opacity: 0.5;
+}
+
+.dragging-handle {
+  cursor: ew-resize;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.footer {
+  position: absolute;
+/*  color: rgb(256,256,256);*/
+  right: 15px;
+  bottom: 0;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+p {
+    font-family: Helvetica, sans-serif;
+    font-size: 12px;
+    color: white;
+}
+
+</style>
+</head>
+<body>
+
+<!-- contenteditable="true" -->
+<!-- &zwj; -->
+<!-- <div id="maincontainer"> -->
+<div id="bungalow" lang ="en" scrolling="no" style="overflow:hidden">
+M<span class="gext">A</span><span class="gext">K</span><span class="gext">I</span><span class="gext">N</span><span class="gext">G</span> <span class="gext">L</span><span class="gext">E</span>
+</div>
+
+<div class="slidecontainer" style="clear:both">
+  <input type="range" min="100" max="150" value="100" class="slider" id="slider1">
+</div>
+
+<div class="footer">
+  <p>Original font is Bungee by David Jonathan Ross, GEXT modification by José Solé. Demo by Jany Belluz and José Solé with help from Nikolaus Waxweiler.</p>
+</div>
+
+<script type="text/javascript">
+$(function() {
+   var value
+   var wdth = 100;
+   let settings = "'wdth' " + wdth + ", 'GEXT' " + value
+   //    $('#slider1').on('input', function () {
+   //     // var elem = document.getElementsByClassName("gext")[0]
+   //     // var theCSSprop = window.getComputedStyle(elem).getPropertyValue("font-variation-settings");
+   //     // console.log(theCSSprop)
+   //     wdth = $(this).val()
+   //     let settings = "'wdth' " + wdth + ", 'GEXT' " + value
+   //     $(".gext").css('font-variation-settings', settings)
+   // })
+
+   // Add sliders to extensible glyphs
+   $('.gext').each((_, g) => {
+     let handle = $('<span class="handle"/>')
+     handle.mousedown(handleMouseDown)
+     handle.appendTo(g)
+   })
+
+   function handleMouseDown(event) {
+     let handle = event.target
+     handle.initialOffset = getOffset(handle, event)
+     // Capture all mouse events during drag
+     $(document).mousemove((event) => {
+       followMouseUsingExtAxis(handle, event)
+     })
+     // Also prevent text selection and always show dragging cursor
+     $('body').addClass('dragging-handle')
+     $(handle).addClass('.dragging')
+     $(document).mouseup(() => {
+       $(document).off('mousemove')
+       $('body').removeClass('dragging-handle')
+       $(handle).removeClass('.dragging')
+     })
+   }
+
+   function getOffset(handle, event) {
+     let rect = handle.getBoundingClientRect()
+     return event.clientX - rect.x
+     // return rect.x + event.clientX
+   }
+
+   function applyAxisValue(gext, value, wdth) {
+    // console.log(wdth)
+     settings = "'wdth' " + wdth + ", 'GEXT' " + value
+     $(gext).css('font-variation-settings', settings)
+   }
+
+   function followMouseUsingExtAxis(handle, event) {
+     /* Find a value along the axis that makes the size of gext such that
+      * the current x mouse offset (from event) is the same as the original
+      * mouse offset (stored in handle).
+      */
+     let gext = handle.parentElement
+     let initial = handle.initialOffset
+     const min = 1
+     const max = 500
+
+     applyAxisValue(gext, min, wdth)
+     // console.log('min', getOffset(handle, event), initial)
+     if (getOffset(handle, event) < initial) {
+       // We're past the min, do nothing
+       return
+     }
+     applyAxisValue(gext, max, wdth)
+     // console.log('max', getOffset(handle, event), initial)
+     if (getOffset(handle, event) > initial) {
+       // We're past the max, do nothing
+       return
+     }
+
+     // We're somewhere in the middle
+     // Use dichotomy to find the best value
+     function dichotomy(a, b) {
+       if ((b - a) < 1) {
+         // Sufficient precision
+         return
+       }
+       let middle = (a + b) / 2
+       applyAxisValue(gext, middle, wdth)
+       // console.log('dic', getOffset(handle, event), initial)
+       if (getOffset(handle, event) < initial) {
+         dichotomy(a, middle)
+       } else {
+         dichotomy(middle, b)
+       }
+     }
+     dichotomy(min, max)
+   }
+      $('#slider1').on('input', function () {
+        var elements = document.getElementsByClassName("gext")
+        for (var i = 0; i < elements.length; i++) {
+            var theCSSprop = window.getComputedStyle(elements[i]).getPropertyValue("font-variation-settings");
+            // console.log(theCSSprop)
+            wdth = $(this).val()
+            settings = "'wdth' " + wdth + ', ' + theCSSprop.split(",")[1]
+            $(elements[i]).css('font-variation-settings', settings)
+        }
+   })
+});
+</script>
+</body>
+</html>
