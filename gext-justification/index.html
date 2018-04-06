@@ -1,0 +1,167 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<style>
+@font-face {
+  font-family: 'Arta';
+  src:  url('Arta-VF.ttf') format('truetype');
+}
+
+body {
+  /*background-color: rgb(29,24,96);*/
+  background-color: white;
+}
+
+#arabic {
+  /* min-width: 800px;
+  max-width: 80%;
+  resize: horizontal;
+  overflow: auto;
+  position: relative;
+  right: 20px;
+  float: right;
+  width: 80%;
+  */
+  /* text-align: justify; */
+  /*color: rgb(29,24,96);;*/
+  direction: rtl;
+  margin-left: -440px;
+  margin-right: 60px;
+  font-family: "Arta";
+  font-size: 120px;
+  font-variation-settings: "GEXT" 0;
+}
+
+#arabic .gext {
+  font-variation-settings: "GEXT" 0;
+  white-space: nowrap;
+}
+
+.slidecontainer {
+  top: 60px;
+  right: 20px;
+  height: 80px;
+  float: right;
+  position: relative;
+}
+
+.gext {
+  position: relative;
+  overflow: visible;
+  /* background: rgba(255,0,0,0.05); */
+}
+
+.gext .handle, .gext .background {
+  height: 1em;
+  position: absolute;
+  bottom: -0.1em;
+}
+
+.gext .background {
+  right: 0;
+  width: calc(100% - 0.2em);
+}
+
+.gext.locked .background {
+  background: rgba(1, 1, 1, 0.1);
+}
+
+.gext .handle {
+  width: 0.2em;
+  background-color: red;
+  opacity: 0.1;
+  left: 0;
+  cursor: ew-resize;
+}
+
+.gext:hover .handle {
+  opacity: 0.5;
+}
+
+.gext .lock {
+  font-size: 10%;
+  position: absolute;
+  top: 3em;
+  right: 0px;
+  visibility: hidden;
+}
+
+.gext .lock::before {
+  content: "unlock";
+}
+
+.gext.locked .lock {
+  visibility: visible;
+  cursor: pointer;
+}
+
+.handle.dragging {
+  opacity: 0.5;
+}
+
+.gext-outer {
+  color: transparent;
+}
+
+.gext-inner {
+  color: transparent;
+}
+
+.token {
+  /* background: rgba(0,0,255,0.05); */
+}
+
+.token-space {
+  /* background: rgba(0,255,0,0.05); */
+}
+
+.dragging-handle {
+  cursor: ew-resize;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.footer {
+  position: absolute;
+/*  color: rgb(256,256,256);*/
+  right: 15px;
+  bottom: 0;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+p {
+    font-family: Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- contenteditable="true" -->
+<!-- &zwj; -->
+<!-- <div id="maincontainer"> -->
+<div id="arabic" lang ="fa" scrolling="no">
+  <!-- داند او سنجا<span class="gext">ب</span> خریدن را ستای&zwj;<span class="gext">&zwj;ش</span> ندانست غذا را غلیظ پنداشت و ح&zwj;<span class="gext">&zwj;ی&zwj;</span>&zwj;اط را لند<span class="gext">ن</span> برد تا ن&zwj;<span class="gext">&zwj;س&zwj;</span>&zwj;خ را نشان داد صدا و سیل اخ&zwj;<span class="gext">&zwj;ب&zwj;</span>&zwj;ار جدا جدا و طناب بل&zwj;<span class="gext">&zwj;ن&zwj;</span>&zwj;د جشن س&zwj;<span class="gext">&zwj;ت&zwj;</span>&zwj;ار ساز ناراحت
+</div> -->
+
+همین سان&zwj;<span class="gext">&zwj;ح&zwj;</span>&zwj;ه دستمایه الهام شازده کوچولو <span class="gext">ش&zwj;</span>&zwj;د که در آن شخصیت قهرمان داستا<span class="gext">ن</span> خلبانی بی‌نام پس از فرود در کو<span class="gext">ی&zwj;</span>&zwj;ر با پسر کوچکی آشنا می‌شود پسرک به خلبا<span class="gext">ن</span> می‌گو<span class="gext">ی&zwj;</span>&zwj;د که از سیارکی دوردست می‌آید و آن&zwj;<span class="gext">&zwj;ق&zwj;</span>&zwj;در آنجا زندگی کرده که روز<span class="gext">ی</span> تصمیم می‌گیرد برای اکتشاف سیاره‌های دی&zwj;<span class="gext">&zwj;گ&zwj;</span>&zwj;ر دیار خود را ترک کند او همچنی&zwj;<span class="gext">&zwj;ن</span> برای خلبان از گل رز محبوب&zwj;<span class="gext">&zwj;ش</span> می‌گوید که دل در گرو عش&zwj;<span class="gext">&zwj;ق</span> او دارد از دیگر اخترک‌ها تعری&zwj;<span class="gext">&zwj;ف</span> می‌کند و از روباهی که او را اینجا روی زمین ملاقا<span class="gext">ت</span> کرده است خل&zwj;<span class="gext">&zwj;ب&zwj;</span>&zwj;ان و شازده چاهی را می‌یابند که آن&zwj;<span class="gext">&zwj;ه&zwj;</span>&zwj;ا را از تشنگی نجات می‌دهد ا<span class="gext">م&zwj;</span>&zwj;ا در نهایت شازده کوچو<span class="gext">ل&zwj;</span>&zwj;و خلبان را در جریان تصمیم خود <span class="gext">ق&zwj;</span>&zwj;رار می‌دهد و می‌گوید تصم&zwj;<span class="gext">&zwj;ی&zwj;</span>&zwj;م گرفته به سیار<span class="gext">ک</span> خود بازگردد
+</div>
+<!-- <div class="slidecontainer" style="clear:both"> -->
+<!--   <input type="range" min="0" max="437" value="0" class="slider" id="slider1"> -->
+<!-- </div> -->
+
+<div class="footer">
+  <p>Font designed by Sahar Afshar. Demo by Jany Belluz and José Solé.</p>
+</div>
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
