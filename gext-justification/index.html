@@ -32,7 +32,7 @@ body {
   margin-left: -440px;
   margin-right: 60px;
   font-family: "Arta";
-  font-size: 120px;
+  font-size: 100px;
   font-variation-settings: "GEXT" 0;
 }
 
@@ -52,13 +52,13 @@ body {
 .gext {
   position: relative;
   overflow: visible;
-  /* background: rgba(255,0,0,0.05); */
+  background: rgba(255,0,0,0.05);
 }
 
 .gext .handle, .gext .background {
-  height: 1em;
+  height: 1.2em;
   position: absolute;
-  bottom: -0.1em;
+  bottom: 0em;
 }
 
 .gext .background {
@@ -67,19 +67,19 @@ body {
 }
 
 .gext.locked .background {
-  background: rgba(1, 1, 1, 0.1);
+  background: rgba(1, 1, 1, 0.05);
 }
 
 .gext .handle {
   width: 0.2em;
   background-color: red;
-  opacity: 0.1;
+  opacity: 0.05;
   left: 0;
   cursor: ew-resize;
 }
 
 .gext:hover .handle {
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .gext .lock {
@@ -112,11 +112,11 @@ body {
 }
 
 .token {
-  /* background: rgba(0,0,255,0.05); */
+  background: rgba(0,0,255,0.1);
 }
 
 .token-space {
-  /* background: rgba(0,255,0,0.05); */
+  background: rgba(0,255,0,0.1);
 }
 
 .dragging-handle {
@@ -127,12 +127,22 @@ body {
   user-select: none;
 }
 
+.clicked {
+  background: rgba(0,0,0,0);
+}
+
 .footer {
-  position: absolute;
-/*  color: rgb(256,256,256);*/
+  position: right;
+  /*color: rgb(256,256,256);*/
   right: 15px;
   bottom: 0;
-  padding: 0.5rem;
+  text-align: right;
+}
+
+input.background {
+  position: absolute;
+  float: right;
+  right: 70px;
   text-align: center;
 }
 
@@ -143,15 +153,11 @@ p {
 
 </style>
 </head>
-<body>
-
 <!-- contenteditable="true" -->
 <!-- &zwj; -->
 <!-- <div id="maincontainer"> -->
+<input type="button" name="Background" value="Background" id="disable button" class="background" />
 <div id="arabic" lang ="fa" scrolling="no">
-  <!-- داند او سنجا<span class="gext">ب</span> خریدن را ستای&zwj;<span class="gext">&zwj;ش</span> ندانست غذا را غلیظ پنداشت و ح&zwj;<span class="gext">&zwj;ی&zwj;</span>&zwj;اط را لند<span class="gext">ن</span> برد تا ن&zwj;<span class="gext">&zwj;س&zwj;</span>&zwj;خ را نشان داد صدا و سیل اخ&zwj;<span class="gext">&zwj;ب&zwj;</span>&zwj;ار جدا جدا و طناب بل&zwj;<span class="gext">&zwj;ن&zwj;</span>&zwj;د جشن س&zwj;<span class="gext">&zwj;ت&zwj;</span>&zwj;ار ساز ناراحت
-</div> -->
-
 همین سان&zwj;<span class="gext">&zwj;ح&zwj;</span>&zwj;ه دستمایه الهام شازده کوچولو <span class="gext">ش&zwj;</span>&zwj;د که در آن شخصیت قهرمان داستا<span class="gext">ن</span> خلبانی بی‌نام پس از فرود در کو<span class="gext">ی&zwj;</span>&zwj;ر با پسر کوچکی آشنا می‌شود پسرک به خلبا<span class="gext">ن</span> می‌گو<span class="gext">ی&zwj;</span>&zwj;د که از سیارکی دوردست می‌آید و آن&zwj;<span class="gext">&zwj;ق&zwj;</span>&zwj;در آنجا زندگی کرده که روز<span class="gext">ی</span> تصمیم می‌گیرد برای اکتشاف سیاره‌های دی&zwj;<span class="gext">&zwj;گ&zwj;</span>&zwj;ر دیار خود را ترک کند او همچنی&zwj;<span class="gext">&zwj;ن</span> برای خلبان از گل رز محبوب&zwj;<span class="gext">&zwj;ش</span> می‌گوید که دل در گرو عش&zwj;<span class="gext">&zwj;ق</span> او دارد از دیگر اخترک‌ها تعری&zwj;<span class="gext">&zwj;ف</span> می‌کند و از روباهی که او را اینجا روی زمین ملاقا<span class="gext">ت</span> کرده است خل&zwj;<span class="gext">&zwj;ب&zwj;</span>&zwj;ان و شازده چاهی را می‌یابند که آن&zwj;<span class="gext">&zwj;ه&zwj;</span>&zwj;ا را از تشنگی نجات می‌دهد ا<span class="gext">م&zwj;</span>&zwj;ا در نهایت شازده کوچو<span class="gext">ل&zwj;</span>&zwj;و خلبان را در جریان تصمیم خود <span class="gext">ق&zwj;</span>&zwj;رار می‌دهد و می‌گوید تصم&zwj;<span class="gext">&zwj;ی&zwj;</span>&zwj;م گرفته به سیار<span class="gext">ک</span> خود بازگردد
 </div>
 <!-- <div class="slidecontainer" style="clear:both"> -->
@@ -162,6 +168,17 @@ p {
   <p>Font designed by Sahar Afshar. Demo by Jany Belluz and José Solé.</p>
 </div>
 
+<script type="text/javascript">
+$(".background").click(function(){
+  if(!$(".token, .gext").hasClass('clicked')){
+    $(".token, .gext").addClass('clicked');
+  } else{
+    $(".token, .gext").removeClass('clicked');
+  }
+});
+</script>
+
 <script type="text/javascript" src="script.js"></script>
+
 </body>
 </html>
