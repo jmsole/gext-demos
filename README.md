@@ -9,9 +9,7 @@ Glyph extension font axis demos. All these demos and files are currently a work 
 
 [GEXT axis justification demo](https://jmsole.github.io/gext-demos/gext-justification/): **THIS DEMO WORKS PROPERLY ONLY ON THE LATEST VERSIONS OF FIREFOX WITH VARIABLE FONT SUPPORT ACTIVATED**: For this demo we have implemented full justification using the GEXT axis to allow for long, curved kashidas. As a first demo for this functionality, we have hardcoded the position of the kashidas. To use, change the width of your browser window and see how the length of the kashidas change.
 
-There are handles that allow for manual control of the extension of the kashidas. Once a kashida has been adjusted manually, it gets locked into that width and it will not change until you hit the unlock button.  
-To apply the axis to individual glyphs without breaking the word shaping, we've duplicated each word with a kashida and made any redundant characters invisible while accounting for their width.  
-The justification is using JavaScript code to break lines greedily and then use the GEXT axis and word spacing to adjust to the least bad line setting.
+There are handles that allow for manual control of the extension of the kashidas. Once a kashida has been adjusted manually, it gets locked into that width and it will not change until you hit the unlock button. To apply the axis to individual glyphs without breaking the word shaping, we've duplicated each word with a kashida and made any redundant characters invisible while accounting for their width. The justification is using JavaScript code to break lines greedily and then use the GEXT axis and word spacing to adjust to the least bad line setting.
 
 Finally, you can turn the background colours on and off with the `Background` button. These colours help visualize each section of the text and higlight how it's affected by changing the window width. In `purple` are parts of the text that are not affected by GEXT or justification. Kashidas have a `red` background. The space character is marked in `green`. Extra whitespace added by the justification code is set in `white`.
 
